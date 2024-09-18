@@ -77,3 +77,9 @@ let forClinic;
                     });
                 }
             });
+// unlink or delete file
+if (req.files) {
+            req.files.findIndex((ele, i) => {
+                unlinkFile(ele.path);
+            });
+        }
