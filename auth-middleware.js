@@ -238,3 +238,33 @@ encrypt(text) {
       return err;
     }
   }
+
+/**
+ * checkToken
+*/
+exports.checkToken = async (token) => {
+    let result = false;
+    try {
+        var decoded = jwt.verify(token, process.env.JWT_SECRET);
+        var now = moment(new Date()); //todays date
+        var end = moment(decoded.createdAt); // another date
+        var duration = moment.duration(now.diff(end));
+        var asMinutes = duration.asMinutes();
+//Todo:: token time
+        if (asMinutes > 20160) {
+            return result = false;
+        }
+
+        result = await User.findOne({
+            _id: decoded._id
+        });
+
+        return result;
+
+    } catch (err) {
+        if (err) {
+            return result = false;
+        }
+    }
+
+}
