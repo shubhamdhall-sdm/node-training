@@ -142,6 +142,11 @@ let petFilesUploader = multer({
 */
 exports.uploadPetFilesImage = petFilesUploader.any(); 
 
+/*
+ * upload pet document configuration
+*/
+exports.uploadPetDocument = petDocumentUploader.single('pet_document');
+
 let forClinic;
             let petImage = '';
             let petDocuments = [];
