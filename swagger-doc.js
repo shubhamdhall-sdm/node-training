@@ -1,7 +1,7 @@
 import { Router } from "express";
 import swaggerUi from "swagger-ui-express";
 import swaggerJSDoc from "swagger-jsdoc";
-
+// https://petstore.swagger.io/?_gl=1*ekllh7*_gcl_au*MTYzODEyNTIzNS4xNzI3MTUzNTI2
 export const apiDoc = (app: Router) => {
   const options = {
     swaggerDefinition: {
