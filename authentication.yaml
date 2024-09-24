@@ -1,0 +1,182 @@
+/core/persons:
+  post:
+    security:
+      - basicAuth: []
+      - Key: []
+    tags:
+      - "User Management"
+    summary: Create Person
+    consumes:
+      - application/json
+    produces:
+      - application/json
+    parameters:
+      - in: body
+        name: createPerson
+        required: true
+        schema:
+          type: object
+          properties:
+            username:
+              type: string
+            personalEmail:
+              type: string
+            orgId:
+              type: string
+            phone:
+              type: string
+            invitedBy:
+              type: string
+            firstName:
+              type: string
+            lastName:
+              type: string
+    description: Create Person
+    responses:
+      200:
+        description: "Person created successfully"
+      409:
+        description: "Error while creating person"
+      500:
+        description: "Internal server error and stack trace"
+/core/person-details:        
+  get:
+    security:
+      - basicAuth: []
+      - Key: []
+    tags:
+      - "User Management"
+    summary: Get all persons
+    consumes:
+      - application/json
+    produces:
+      - application/json
+    parameters:
+      - in: query
+        name: orgId
+        required: false
+        schema:
+          type: string
+        description: Org Id
+      - in: query
+        name: shortData
+        required: false
+        schema:
+          type: string
+        description: Send either notAdvisors or ''
+      - in: query
+        name: _id
+        required: false
+        schema:
+          type: string
+        description: Logged in user id
+      - in: query
+        name: page
+        required: false
+        schema:
+          type: number
+        description: Page
+      - in: query
+        name: count
+        required: false
+        schema:
+          type: number
+        description: Count
+      - in: query
+        name: sortBy
+        required: false
+        schema:
+          type: string
+        description: Sort By
+      - in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+        description: Sort
+      - in: query
+        name: keyword
+        required: false
+        schema:
+          type: string
+        description: Keyword
+    responses:
+      200:
+        description: "Get all persons"
+      409:
+        description: "Error while gettings all persons"
+      500:
+        description: "Internal server error and stack trace"
+/core/persons/:id:
+  patch:
+    security:
+      - basicAuth: []
+      - Key: []
+    tags:
+      - "User Management"
+    summary: Update Person
+    consumes:
+      - application/json
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: id
+        required: false
+        schema:
+          type: string
+        description: Person Id
+      - in: body
+        name: updatePersonById
+        required: true
+        schema:
+          type: object
+          properties:
+            username:
+              type: string
+            personalEmail:
+              type: string
+            phone:
+              type: string
+            firstName:
+              type: string
+            lastName:
+              type: string
+            status:
+              type: object
+              properties:
+                value:
+                  type: string
+    responses:
+      200:
+        description: "Person updated successfully"
+      409:
+        description: "Error while updating person details"
+      500:
+        description: "Internal server error and stack trace"
+/core/delete-persons/:id:
+  delete:
+    security:
+      - basicAuth: []
+      - Key: []
+    tags:
+      - "User Management"
+    summary: Delete Person
+    consumes:
+      - application/json
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: id
+        required: false
+        schema:
+          type: string
+        description: Person Id
+    responses:
+      200:
+        description: "Person has been deleted successfully"
+      409:
+        description: "Error while deleting person"
+      500:
+        description: "Internal server error and stack trace"
