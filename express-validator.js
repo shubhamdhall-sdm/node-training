@@ -48,13 +48,26 @@ exports.addNewClinic = [
         .isEmpty()
         .withMessage("Zip Code field is empty"),
     check("phone")
+        .optional()
         .not()
         .isEmpty()
         .withMessage("Phone Number field is empty"),
+        .isLength({
+            min: 5
+        })
+        .withMessage("Password is too short min 5 characters required"),
     (req, res, next) => {
         validationResult(req, res, next);
     }
 ];
+router.post(
+    "/add-new-clinic",
+    requireAuth,
+    trimRequest.all,
+    validate.addNewClinic,
+    controller.addNewClinic
+);
+
 const { validationResult } = require("express-validator");
 exports.validationResult = (req, res, next) => {
   try {
