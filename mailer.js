@@ -37,7 +37,7 @@ const { sendAppointmentDetailsSubject } = require('../subject/registration/subje
  * @param res  
  * @returns 
 */
-exports.sendAppointmentMeetingDetails = async (mailData, callback) => {
+exports.sendDoctorMeetingDetails = async (mailData, callback) => {
     // const mailSendArr = [];
     // const mailSendErrArr = [];
 
@@ -59,7 +59,9 @@ exports.sendAppointmentMeetingDetails = async (mailData, callback) => {
             }
         });
     }
+}
 
+exports.sendPatientMeetingDetails = async (mailData, callback) => {
     if(mailData.patient_data){
         await ejs.renderFile("src/views/mailer/appointmentMeetingPatient.mailer.ejs", mailData.patient_data, function (err, data) {
             if (err) {
@@ -110,6 +112,23 @@ exports.sendAppointmentMeetingDetails = async (mailData, callback) => {
 
 }
 
+/**
+*  service/controller file
+*/
+
+import emailer from './emailer';
+
+var mailData = {
+                header: backendAppURI + "photos/images/profile-created-header.png",
+                user_email: item.email,
+                name: req.name,
+                app_name: process.env.APP_NAME,
+                reset_password_url: `${process.env.FRONT_URL}/reset-password/${updatedData.passwordtoken}`,
+                subject: "Account Activated!",
+            }
+
+            await emailer.sendPatientMeetingDetails(mailData);
+	
 
 /**
 *  email template
