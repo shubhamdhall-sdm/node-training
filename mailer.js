@@ -38,6 +38,15 @@ const { sendAppointmentDetailsSubject } = require('../subject/registration/subje
  * @returns 
 */
 exports.sendDoctorMeetingDetails = async (mailData, callback) => {
+
+	// transport.sendMail(data, err => {
+        //   if (err) {
+        //     reject(err)
+        //   } else {
+        //     resolve(data)
+        //   }
+        // });
+	
     // const mailSendArr = [];
     // const mailSendErrArr = [];
 
