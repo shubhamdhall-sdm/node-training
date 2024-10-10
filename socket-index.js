@@ -41,3 +41,6 @@ io.on('connection', (socket) => {
 });
 
 module.exports = socketServer;
+
+const socketServer = require("./socket");
+socketServer.listen(process.env.SOCKET_PORT, () => 'Socket server is running on port 4400'); 
